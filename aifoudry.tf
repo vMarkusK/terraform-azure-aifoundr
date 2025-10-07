@@ -2,6 +2,8 @@ module "ai_foundry" {
   source  = "Azure/avm-ptn-aiml-ai-foundry/azurerm"
   version = "0.6.0"
 
+  enable_telemetry = false
+
   base_name                  = var.usecase
   location                   = azurerm_resource_group.this.location
   resource_group_resource_id = azurerm_resource_group.this.id
