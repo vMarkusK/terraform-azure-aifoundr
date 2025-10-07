@@ -8,6 +8,8 @@ module "ai_foundry" {
   location                   = azurerm_resource_group.this.location
   resource_group_resource_id = azurerm_resource_group.this.id
 
+  tags = local.tags
+
   ai_foundry = {
     create_ai_agent_service = false
     name                    = module.naming.cognitive_account.name_unique

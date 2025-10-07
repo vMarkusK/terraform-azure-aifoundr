@@ -39,6 +39,8 @@ module "naming" {
 }
 
 resource "azurerm_resource_group" "this" {
-  location = random_shuffle.locations.result[0]
+  location = var.location
   name     = module.naming.resource_group.name_unique
+
+  tags = local.tags
 }
