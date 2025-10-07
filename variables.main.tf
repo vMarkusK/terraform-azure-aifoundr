@@ -19,8 +19,3 @@ variable "usecase" {
   description = "Use Case Name"
   type        = string
 }
-
-variable "suffix" {
-  description = "Use Case Suffix"
-  type        = string
-}
