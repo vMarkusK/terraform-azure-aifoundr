@@ -1,0 +1,5 @@
+resource_group_name  = "rg-state-aifoundr-vghfiu"
+storage_account_name = "ststateaifoundrvghfiu"
+container_name       = "tfstate"
+key                  = "dev.tfstate"
+use_azuread_auth     = true
