@@ -1,9 +1,10 @@
+// Inlined local ai_foundry module replaces external module source to make
+// the repository self-contained. The local module implements the
+// subset of resources and outputs used by the root configuration.
 module "ai_foundry" {
-  source  = "Azure/avm-ptn-aiml-ai-foundry/azurerm"
-  version = "0.6.0"
+  source = "./modules/ai_foundry"
 
-  enable_telemetry = false
-
+  enable_telemetry           = false
   base_name                  = var.usecase
   location                   = azurerm_resource_group.this.location
   resource_group_resource_id = azurerm_resource_group.this.id
