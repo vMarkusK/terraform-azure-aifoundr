@@ -1,13 +1,4 @@
-// Variables for inlined ai_foundry module
-// These mirror the external module inputs used by the root module so
-// switching to the local module is seamless.
-
-variable "enable_telemetry" {
-  type    = bool
-  default = false
-}
-
-variable "base_name" {
+variable "rg_name" {
   type = string
 }
 
@@ -15,7 +6,15 @@ variable "location" {
   type = string
 }
 
-variable "resource_group_resource_id" {
+variable "cognitive_account_name" {
+  type = string
+}
+
+variable "cosmosdb_account_name" {
+  type = string
+}
+
+variable "storage_account_name" {
   type = string
 }
 

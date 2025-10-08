@@ -4,77 +4,29 @@
 module "ai_foundry" {
   source = "./modules/ai_foundry"
 
-  enable_telemetry           = false
-  base_name                  = var.usecase
-  location                   = azurerm_resource_group.this.location
-  resource_group_resource_id = azurerm_resource_group.this.id
+  rg_name  = azurerm_resource_group.this.name
+  location = azurerm_resource_group.this.location
 
   tags = local.tags
+
+  cognitive_account_name = module.naming.cognitive_account.name_unique
+  storage_account_name   = module.naming.storage_account.name_unique
+  ccosmosdb_account_name = module.naming.cosmosdb_account.name_unique
 
   ai_foundry = {
     create_ai_agent_service = false
     name                    = module.naming.cognitive_account.name_unique
   }
+  ai_model_deployments = var.ai_model_deployments
+  ai_projects          = var.ai_projects
+  ai_search_definition = var.ai_search_definition
+  cosmosdb_definition  = var.cosmosdb_definition
 
-  ai_model_deployments = {
-    "gpt-4o" = {
-      name = "gpt-4.1"
-      model = {
-        format  = "OpenAI"
-        name    = "gpt-4.1"
-        version = "2025-04-14"
-      }
-      scale = {
-        type     = "GlobalStandard"
-        capacity = 1
-      }
-    }
-  }
+  create_byor              = var.ai_foundry_create_byor
+  create_private_endpoints = var.ai_foundry_create_private_endpoints
 
-  ai_projects = {
-    project_1 = {
-      name                       = "playground"
-      description                = "Markus AI Playground"
-      display_name               = "Markus AI Playground"
-      create_project_connections = true
-      cosmos_db_connection = {
-        new_resource_map_key = "this"
-      }
-      ai_search_connection = {
-        new_resource_map_key = "this"
-      }
-      storage_account_connection = {
-        new_resource_map_key = "this"
-      }
-    }
-  }
-
-  ai_search_definition = {
-    this = {
-      enable_diagnostic_settings = false
-    }
-  }
-
-  cosmosdb_definition = {
-    this = {
-      enable_diagnostic_settings = false
-    }
-  }
-
-  create_byor              = true
-  create_private_endpoints = false # default: false
-
-  key_vault_definition = {
-    this = {
-      enable_diagnostic_settings = false
-    }
-  }
-
-  storage_account_definition = {
-    this = {
-      enable_diagnostic_settings = false
-    }
-  }
+  key_vault_definition       = var.key_vault_definition
+  storage_account_definition = var.storage_account_definition
 
   depends_on = [azapi_resource_action.purge_ai_foundry]
 }

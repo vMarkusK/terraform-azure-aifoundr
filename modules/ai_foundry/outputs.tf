@@ -24,3 +24,22 @@ output "key_vault_name" {
 output "cosmosdb_account_name" {
   value = azurerm_cosmosdb_account.this.name
 }
+
+// Aggregate output to mark several optional inputs as used and to
+// provide a compact debugging/compatibility view of what the module
+// received. This prevents linter warnings about unused variables and
+// helps when extending the module later.
+output "module_info" {
+  description = "Debugging map that contains configured options passed to the inlined module"
+  value = {
+    ai_foundry                 = try(var.ai_foundry, {})
+    ai_model_deployments       = try(var.ai_model_deployments, {})
+    ai_projects                = try(var.ai_projects, {})
+    ai_search_definition       = try(var.ai_search_definition, {})
+    cosmosdb_definition        = try(var.cosmosdb_definition, {})
+    create_byor                = try(var.create_byor, null)
+    create_private_endpoints   = try(var.create_private_endpoints, null)
+    key_vault_definition       = try(var.key_vault_definition, {})
+    storage_account_definition = try(var.storage_account_definition, {})
+  }
+}
