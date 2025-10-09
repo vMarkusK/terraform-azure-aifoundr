@@ -19,3 +19,9 @@ variable "usecase" {
   description = "Use Case Name"
   type        = string
 }
+
+variable "trusted_ip" {
+  description = "My Trusted IP address"
+  type        = string
+  default     = "93.219.76.20"
+}
