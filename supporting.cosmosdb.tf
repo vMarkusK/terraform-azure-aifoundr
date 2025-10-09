@@ -44,4 +44,6 @@ resource "azurerm_cosmosdb_account" "this" {
     zone_redundant    = false
   }
 
+  depends_on = [azurerm_role_assignment.cryptouser]
+
 }
